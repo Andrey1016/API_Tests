@@ -27,3 +27,4 @@ def test_update_item_status_active(creating_item):
     created_item_id = creating_item.create_item()
     update_item.update_item_status_active(created_item_id)
     update_item.check_updated_status_active()
+

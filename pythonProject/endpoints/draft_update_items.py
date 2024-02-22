@@ -45,7 +45,7 @@ def _create_common_payload(create_item, summary, status="NEW"):
                     "name": "Category",
                     "values": [
                         {
-                            "id": 326,
+
                             "name": "Warehouse"
                         }
                     ]
@@ -357,32 +357,69 @@ class UpdateItem:
     response = None
     response_json = None
 
+    # --------------------------------------------------------------------------
     def update_item_summary(self, create_item):
         payload = _create_common_payload(create_item, "Auto Created item Api 123XXXX")
         self._make_api_request(create_item, payload)
 
+    def check_updated_summary(self):
+        expected_summary = "Auto Created item Api 1123XXXX"
+        actual_summary = self.response['item']['summary']
+        assert actual_summary == expected_summary, f"Test FAILED: Summary mismatch. Expected: {expected_summary}, Actual: {actual_summary}"
+        print(f"Updated summary: {actual_summary}")
+
+    # --------------------------------------------------------------------------
     def update_item_author(self, create_item):
         payload = _create_common_payload(create_item, "Auto Created item Api", status="NEW")
         payload["item"]["authors"][0]["id"] = 285
         self._make_api_request(create_item, payload)
 
+    def check_updated_author(self):
+        expected_username = "AndreyTest123"
+        actual_username = self.response["item"]["authors"][0]["username"]
+        assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
+        print(f"Updated Author: {actual_username}")
+
+    # --------------------------------------------------------------------------
     def update_item_status_active(self, create_item):
         payload = _create_common_payload(create_item, "Auto Created item Api", status="ACTIVE")
         payload["item"]["createDate"] = "2024-02-20T04:42:09.000+0000"
         payload["item"]["startDate"] = "2024-02-20T04:56:10.000+0000"
-
         self._make_api_request(create_item, payload)
-    # updating Fields-------------------------------------------------------------------------------
+
+    def check_updated_status_active(self):
+        expected_status = "ACTIVE"
+        actual_status = self.response['item']['status']
+        assert actual_status == expected_status, f"Test FAILED: Summary mismatch. Expected: {expected_status}, Actual: {actual_status}"
+        print(f"Updated Status: {actual_status}")
+
+    # Updating Fields-------------------------------------------------------------------------------
+
     def update_item_text_area(self, create_item, new_text):
         payload = _create_common_payload(create_item, "Auto Created item Api", status="NEW")
         payload["item"]["fields"][0]["value"] = new_text
-        payload["item"]["fields"][0]["htmlValue"] = f"<p>{new_text}</p>"  # Update HTML value if needed
+        payload["item"]["fields"][0]["htmlValue"] = f"<p>{new_text}</p>"
         self._make_api_request(create_item, payload)
+
+    # --------------------------------------------------------------------------
+    def check_updated_text_area(self):
+        expected = "NEW text area"
+        actual = self.response["item"]["fields"][0]["value"]
+        assert actual == expected, f"Test FAILED: Summary mismatch. Expected: {expected}, Actual: {actual}"
+        print(f"Updated Text Area: {actual}")
 
     def update_item_text_field(self, create_item, new_text):
         payload = _create_common_payload(create_item, "Auto Created item Api", status="NEW")
         payload["item"]["fields"][1]["value"] = new_text
         self._make_api_request(create_item, payload)
+
+    # --------------------------------------------------------------------------
+
+    def check_updated_text_field(self):
+        expected = "NEW text field"
+        actual = self.response["item"]["fields"][1]["value"]
+        assert actual == expected, f"Test FAILED: Summary mismatch. Expected: {expected}, Actual: {actual}"
+        print(f"Updated Text Field: {actual}")
 
     def update_item_number_field(self, create_item, new_number_value):
         payload = _create_common_payload(create_item, "Auto Created item Api", status="NEW")
@@ -397,6 +434,14 @@ class UpdateItem:
         else:
             print(f"Error")
 
+    def check_updated_number_field(self):
+        expected = 2
+        actual = self.response["item"]["fields"][2]["numericValue"]
+        assert actual == expected, f"Test FAILED: Numeric value mismatch. Expected: {expected}, Actual: {actual}"
+        print(f"Updated Number Field: {actual}")
+
+    # --------------------------------------------------------------------------
+
     def update_item_date_field(self, create_item, new_number_value):
         payload = _create_common_payload(create_item, "Auto Created item Api", status="NEW")
         field_index = None
@@ -410,10 +455,16 @@ class UpdateItem:
         else:
             print(f"Error")
 
+    def check_updated_date_field(self):
+        expected = "2023-01-01T06:00:00.000+0000"
+        actual = self.response["item"]["fields"][3]["dateValue"]
+        assert actual == expected, f"Test FAILED: dateValue value mismatch. Expected: {expected}, Actual: {actual}"
+        print(f"Updated Date Field: {actual}")
+
+    # --------------------------------------------------------------------------
+
     def update_item_date_time_field(self, create_item, new_date_value):
         payload = _create_common_payload(create_item, "Auto Created item Api", status="NEW")
-
-        # Find the index of the field with the name "Date Field"
         field_index = None
         for i, field in enumerate(payload["item"]["fields"]):
             if field["name"] == "Date Time Field":
@@ -424,6 +475,29 @@ class UpdateItem:
             self._make_api_request(create_item, payload)
         else:
             print(f"Error: Field 'Date Field' not found in the payload.")
+
+    def check_updated_date_time_field(self):
+        expected = "2023-01-01T16:29:00.000+0000"
+        actual = self.response["item"]["fields"][4]["dateValue"]
+        assert actual == expected, f"Test FAILED: dateValue value mismatch. Expected: {expected}, Actual: {actual}"
+        print(f"Updated Date Time Field: {actual}")
+
+    def update_item_attribute_category(self, create_item, new_category):
+        payload = _create_common_payload(create_item, "Auto Created item Api", status="NEW")
+        for attribute in payload["item"]["attributes"]:
+            if attribute["name"] == "Category":
+                attribute["values"][0]["name"] = new_category
+                self._make_api_request(create_item, payload)
+                break
+        else:
+            print(f"Error: Attribute 'Category' not found in the payload.")
+
+    def check_updated_attribute_category(self):
+        expected_category = "IT"
+        actual_category = self.response["item"]["attributes"][0]["values"][0]["name"]
+        assert actual_category == expected_category, f"Test FAILED: Category mismatch. Expected: {expected_category}, Actual: {actual_category}"
+        print(f"Updated Category: {actual_category}")
+
     # ------------------------------------------------------------------------------
     def _make_api_request(self, create_item, payload):
         credentials = ApiCredentials()
@@ -436,54 +510,3 @@ class UpdateItem:
         assert self.response['results'][0]['operation'] == 'UPDATE'
         self.response = requests.get(f"https://test2.kainexus.com/api/public/v1/json/item?id={create_item}",
                                      auth=HTTPBasicAuth(credentials.username, credentials.password)).json()
-
-    # check updated responses-------------------------------------------------------
-
-    def check_updated_summary(self):
-        expected_summary = "Auto Created item Api 123XXXX"
-        actual_summary = self.response['item']['summary']
-        assert actual_summary == expected_summary, f"Test FAILED: Summary mismatch. Expected: {expected_summary}, Actual: {actual_summary}"
-        print(f"Updated summary: {actual_summary}")
-
-    def check_updated_author(self):
-        expected_username = "AndreyTest123"
-        actual_username = self.response["item"]["authors"][0]["username"]
-        assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
-        print(f"Updated Author: {actual_username}")
-
-    def check_updated_status_active(self):
-        expected_status = "ACTIVE"
-        actual_status = self.response['item']['status']
-        assert actual_status == expected_status, f"Test FAILED: Summary mismatch. Expected: {expected_status}, Actual: {actual_status}"
-        print(f"Updated Status: {actual_status}")
-
-    # update fields
-    def check_updated_text_area(self):
-        expected = "NEW text area"
-        actual = self.response["item"]["fields"][0]["value"]
-        assert actual == expected, f"Test FAILED: Summary mismatch. Expected: {expected}, Actual: {actual}"
-        print(f"Updated Text Area: {actual}")
-
-    def check_updated_text_field(self):
-        expected = "NEW text field"
-        actual = self.response["item"]["fields"][1]["value"]
-        assert actual == expected, f"Test FAILED: Summary mismatch. Expected: {expected}, Actual: {actual}"
-        print(f"Updated Text Field: {actual}")
-
-    def check_updated_number_field(self):
-        expected = 2
-        actual = self.response["item"]["fields"][2]["numericValue"]
-        assert actual == expected, f"Test FAILED: Numeric value mismatch. Expected: {expected}, Actual: {actual}"
-        print(f"Updated Number Field: {actual}")
-
-    def check_updated_date_field(self):
-        expected = "2023-01-01T06:00:00.000+0000"
-        actual = self.response["item"]["fields"][3]["dateValue"]
-        assert actual == expected, f"Test FAILED: dateValue value mismatch. Expected: {expected}, Actual: {actual}"
-        print(f"Updated Date Field: {actual}")
-
-    def check_updated_date_time_field(self):
-        expected = "2023-01-01T16:29:00.000+0000"
-        actual = self.response["item"]["fields"][4]["dateValue"]
-        assert actual == expected, f"Test FAILED: dateValue value mismatch. Expected: {expected}, Actual: {actual}"
-        print(f"Updated Date Time Field: {actual}")

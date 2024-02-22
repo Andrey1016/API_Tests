@@ -67,3 +67,12 @@ def test_update_item_date_time_field(creating_item):
     new_number_value = "2023-01-01T16:29:00.000+0000"
     update_item_instance.update_item_date_time_field(create_item_id, new_number_value)
     update_item_instance.check_updated_date_time_field()
+
+
+def test_update_item_attribute_category(creating_item):
+    update_item_instance = UpdateItem()
+    create_item_id = creating_item.create_item()
+    new_number_value = "IT"
+    update_item_instance.update_item_attribute_category(create_item_id, new_number_value)
+    update_item_instance.check_updated_attribute_category()
+
