@@ -6,8 +6,6 @@ from conftest import ApiCredentials
 class NewItem:
     response = None
 
-    # response_json = None
-
     def create_item(self, payload):
         credentials = ApiCredentials()
         payload = {"item": {
@@ -17,26 +15,6 @@ class NewItem:
             "summary": "Auto Created item Api",
 
             "status": "NEW",
-            "fields": [
-                {
-                    "id": 374,
-                    "name": "Text Area",
-                    "value": "Auto test 000000",
-                    "htmlValue": "&lt;p&gt;test 123&lt;/p&gt;"
-                }
-            ],
-            "attributes": [
-                {
-                    "id": 284,
-                    "name": "5D Level",
-                    "values": [
-                        {
-                            "id": 1092,
-                            "name": "Yes"
-                        }
-                    ]
-                }
-            ],
             "authors": [
                 {
                     "id": 211,

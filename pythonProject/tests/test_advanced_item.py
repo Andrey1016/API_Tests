@@ -9,29 +9,11 @@ def test_create_item():
         "templateId": 452,
         "templateName": "Test API",
 
-        "summary": "Auto Created item Api 123 ",
+        "summary": "Auto Created item Api 123",
 
         "status": "NEW",
-        "fields": [
-            {
-                "id": 374,
-                "name": "Text Area",
-                "value": "Auto test 000000",
-                "htmlValue": "&lt;p&gt;test 123&lt;/p&gt;"
-            }
-        ],
-        "attributes": [
-            {
-                "id": 284,
-                "name": "5D Level",
-                "values": [
-                    {
-                        "id": 1092,
-                        "name": "Yes"
-                    }
-                ]
-            }
-        ],
+
+
         "authors": [
             {
                 "id": 211,

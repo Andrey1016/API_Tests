@@ -7,7 +7,7 @@ class DeletingItem:
     response = None
     response_json = None
 
-    def delete_item(self, create_item):
+    def delete_advanced_item(self, create_item):
         credentials = ApiCredentials()
         payload = {
             "item": {
@@ -17,26 +17,7 @@ class DeletingItem:
                 "summary": "Auto Created item Api",
 
                 "status": "DELETED",
-                "fields": [
-                    {
-                        "id": 374,
-                        "name": "Text Area",
-                        "value": "Auto test 123456",
-                        "htmlValue": "Auto test 123456"
-                    }
-                ],
-                "attributes": [
-                    {
-                        "id": 284,
-                        "name": "5D Level",
-                        "values": [
-                            {
-                                "id": 1092,
-                                "name": "Yes"
-                            }
-                        ]
-                    }
-                ],
+
                 "authors": [
                     {
                         "id": 211,
