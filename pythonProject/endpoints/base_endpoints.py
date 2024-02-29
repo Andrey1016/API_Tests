@@ -364,39 +364,6 @@ class CreateItem:
         assert self.response['results'][0]['operation'] == 'CREATE'
         return self.response['results'][0]['id']
 
-    def delete_advanced_item(self, create_advanced_item):
-        credentials = ApiCredentials()
-        payload = {
-            "item": {
-                "templateId": 452,
-                "templateName": "Test API",
-                "id": create_advanced_item,
-                "summary": "Auto Created item Api",
-                "status": "DELETED",
-                "authors": [
-                    {
-                        "id": 211,
-                        "username": "showroom",
-                        "firstName": "Showroom",
-                        "lastName": "Superuser",
-                        "email": "TEST2showroom@maik.com"
-                    }
-                ],
-            },
-        }
-        self.response = requests.put(f"https://test2.kainexus.com/api/public/v1/json/item?id={create_advanced_item}",
-                                     auth=HTTPBasicAuth(credentials.username, credentials.password),
-                                     json=payload).json()
-        print(self.response)
-        assert self.response['success'] is True
-        assert self.response['results'][0]['id'] == create_advanced_item
-        assert self.response['results'][0]['operation'] == 'UPDATE'
-        self.response = requests.get(f"https://test2.kainexus.com/api/public/v1/json/item?id={create_advanced_item}",
-                                     auth=HTTPBasicAuth(credentials.username, credentials.password)).json()
-        assert self.response['success'] is False
-        assert self.response['errorCode'] == 'ACCESS_DENIED'
-        print(self.response)
-
     def create_standard_item(self):
         credentials = ApiCredentials()
         payload = {
@@ -754,40 +721,6 @@ class CreateItem:
         assert self.response['results'][0]['operation'] == 'CREATE'
         return self.response['results'][0]['id']
 
-    def delete_standard_item(self, create_standard_item):
-        credentials = ApiCredentials()
-        payload = {
-            "item": {
-                "templateId": 463,
-                "templateName": "Test API",
-                "id": create_standard_item,
-
-                "status": "DELETED",
-                "authors": [
-                    {
-                        "id": 211,
-                        "username": "showroom",
-                        "firstName": "Showroom",
-                        "lastName": "Superuser",
-                        "email": "TEST2showroom@maik.com"
-                    }
-                ],
-            },
-        }
-        self.response = requests.put(f"https://test2.kainexus.com/api/public/v1/json/item?id={create_standard_item}",
-                                     auth=HTTPBasicAuth(credentials.username, credentials.password),
-                                     json=payload).json()
-        print(self.response)
-        assert self.response['success'] is True
-        assert self.response['results'][0]['id'] == create_standard_item
-        assert self.response['results'][0]['operation'] == 'UPDATE'
-        self.response = requests.get(f"https://test2.kainexus.com/api/public/v1/json/item?id={create_standard_item}",
-                                     auth=HTTPBasicAuth(credentials.username, credentials.password)).json()
-        assert self.response['success'] is False
-        assert self.response['errorCode'] == 'ACCESS_DENIED'
-        print(self.response)
-
-    # needs to be done ---------------------------------------------------------------------
     def create_simple_item(self):
         credentials = ApiCredentials()
         payload = {
@@ -832,7 +765,7 @@ class CreateItem:
                         "name": "Category",
                         "values": [
                             {
-                                "id": 326,
+
                                 "name": "Warehouse"
                             }
                         ]
@@ -874,13 +807,13 @@ class CreateItem:
                 "participatingLocations": [],
                 "originatingLocations": [
                     {
-                        "id": 581,
+
                         "name": "KaiNexus  Main Location"
                     }
                 ],
                 "responsibleLocations": [
                     {
-                        "id": 581,
+
                         "name": "KaiNexus  Main Location"
                     }
                 ],
@@ -1166,3 +1099,41 @@ class CreateItem:
         print(self.response)
         assert self.response['results'][0]['operation'] == 'CREATE'
         return self.response['results'][0]['id']
+
+
+class DeleteItem:
+    response = None
+    response_json = None
+
+    def delete_item(self, create_advanced_item):
+        credentials = ApiCredentials()
+        payload = {
+            "item": {
+                "templateId": 452,
+                "templateName": "Test API",
+                "id": create_advanced_item,
+                "summary": "Auto Created item Api",
+                "status": "DELETED",
+                "authors": [
+                    {
+                        "id": 211,
+                        "username": "showroom",
+                        "firstName": "Showroom",
+                        "lastName": "Superuser",
+                        "email": "TEST2showroom@maik.com"
+                    }
+                ],
+            },
+        }
+        self.response = requests.put(f"https://test2.kainexus.com/api/public/v1/json/item?id={create_advanced_item}",
+                                     auth=HTTPBasicAuth(credentials.username, credentials.password),
+                                     json=payload).json()
+        print(self.response)
+        assert self.response['success'] is True
+        assert self.response['results'][0]['id'] == create_advanced_item
+        assert self.response['results'][0]['operation'] == 'UPDATE'
+        self.response = requests.get(f"https://test2.kainexus.com/api/public/v1/json/item?id={create_advanced_item}",
+                                     auth=HTTPBasicAuth(credentials.username, credentials.password)).json()
+        assert self.response['success'] is False
+        assert self.response['errorCode'] == 'ACCESS_DENIED'
+        print(self.response)

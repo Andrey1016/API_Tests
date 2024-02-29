@@ -85,10 +85,15 @@ def _create_common_payload(create_standard_item, summary, status="NEW"):
                 "email": "TEST2showroom@maik.com"
             },
             "participatingLocations": [],
-            "originatingLocations": [],
+            "originatingLocations": [
+                {
+
+                    "name": "KaiNexus  Main Location"
+                }
+            ],
             "responsibleLocations": [
                 {
-                    "id": 581,
+
                     "name": "KaiNexus  Main Location"
                 }
             ],
@@ -514,6 +519,27 @@ class UpdateItem:
         assert actual_category == expected_category, f"Test FAILED: Category mismatch. Expected: {expected_category}, Actual: {actual_category}"
         print(f"Updated Category: {actual_category}")
 
+    def update_responsible_location(self, create_advanced_item, new_responsible_location):
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload["item"]["responsibleLocations"][0]["name"] = new_responsible_location
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_update_responsible_location(self):
+        expected = "Dallas"
+        actual = self.response["item"]["responsibleLocations"][0]["name"]
+        assert actual == expected, f"Test FAILED: Numeric value mismatch. Expected: {expected}, Actual: {actual}"
+        print(f"Updated Responsible Location: {actual}")
+
+    def update_originating_location(self, create_advanced_item, new_originating_location):
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload["item"]["originatingLocations"][0]["name"] = new_originating_location
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_update_originating_location(self):
+        expected = "New York"
+        actual = self.response["item"]["originatingLocations"][0]["name"]
+        assert actual == expected, f"Test FAILED: value mismatch. Expected: {expected}, Actual: {actual}"
+        print(f"Updated Originating Location: {actual}")
     # ------------------------------------------------------------------------------
     def _make_api_request(self, create_standard_item, payload):
         credentials = ApiCredentials()
