@@ -1,6 +1,6 @@
 import pytest
-from endpoints.update_simple_items import UpdateItem
-from endpoints.base_endpoints import CreateItem, DeleteItem
+# from endpoints.update_simple_items import UpdateItem
+from endpoints.base_endpoints import CreateItem, DeleteItem, UpdateItem
 
 
 @pytest.fixture
@@ -85,3 +85,10 @@ def test_update_originating_location(creating_and_deleting_item):
     new_originating_location = "New York"
     update_item_instance.update_originating_location(creating_and_deleting_item, new_originating_location)
     update_item_instance.check_update_originating_location()
+
+
+def test_update_all_impact_amounts(creating_and_deleting_item):
+    update_item_instance = UpdateItem()
+    new_amount = 25
+    update_item_instance.update_all_impact_amounts(creating_and_deleting_item, new_amount)
+    update_item_instance.check_update_all_impacts()

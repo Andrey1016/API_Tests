@@ -3,7 +3,7 @@ from requests.auth import HTTPBasicAuth
 from conftest import ApiCredentials
 
 
-def _create_common_payload(create_advanced_item, summary, status="NEW"):
+def _create_common_payload(create_advanced_item, summary, status="NEW", customStatus="NEW"):
     return {
         "item": {
             "templateId": 452,
@@ -11,6 +11,7 @@ def _create_common_payload(create_advanced_item, summary, status="NEW"):
             "id": create_advanced_item,
             "summary": summary,
             "status": status,
+            "customStatus": customStatus,
             "fields": [
                 {
                     "id": 374,
@@ -62,6 +63,51 @@ def _create_common_payload(create_advanced_item, summary, status="NEW"):
                 }
             ],
             "authors": [
+                {
+                    "id": 211,
+                    "username": "showroom",
+                    "firstName": "Showroom",
+                    "lastName": "Superuser",
+                    "email": "TEST2showroom@maik.com"
+                }
+            ],
+            "followers": [
+                {
+                    "id": 211,
+                    "username": "showroom",
+                    "firstName": "Showroom",
+                    "lastName": "Superuser",
+                    "email": "TEST2showroom@maik.com"
+                }
+            ],
+            "sponsors": [
+                {
+                    "id": 211,
+                    "username": "showroom",
+                    "firstName": "Showroom",
+                    "lastName": "Superuser",
+                    "email": "TEST2showroom@maik.com"
+                }
+            ],
+            "leaders": [
+                {
+                    "id": 211,
+                    "username": "showroom",
+                    "firstName": "Showroom",
+                    "lastName": "Superuser",
+                    "email": "TEST2showroom@maik.com"
+                }
+            ],
+            "facilitators": [
+                {
+                    "id": 211,
+                    "username": "showroom",
+                    "firstName": "Showroom",
+                    "lastName": "Superuser",
+                    "email": "TEST2showroom@maik.com"
+                }
+            ],
+            "participants": [
                 {
                     "id": 211,
                     "username": "showroom",
@@ -212,11 +258,7 @@ def _create_common_payload(create_advanced_item, summary, status="NEW"):
                             }
                         ]
                     },
-                    {
-                        "typeId": 64,
-                        "typeName": "Patient Satisfaction",
-                        "id": 7816
-                    },
+
                     {
                         "typeId": 107,
                         "typeName": "Takt time",
@@ -257,21 +299,7 @@ def _create_common_payload(create_advanced_item, summary, status="NEW"):
                             }
                         ]
                     },
-                    {
-                        "typeId": 62,
-                        "typeName": "Patient Safety",
-                        "id": 7819
-                    },
-                    {
-                        "typeId": 65,
-                        "typeName": "Staff Satisfaction",
-                        "id": 7820
-                    },
-                    {
-                        "typeId": 100,
-                        "typeName": "Health",
-                        "id": 7821
-                    },
+
                     {
                         "typeId": 105,
                         "typeName": "Cost Savings (Location Splitting)",
@@ -288,11 +316,7 @@ def _create_common_payload(create_advanced_item, summary, status="NEW"):
                             }
                         ]
                     },
-                    {
-                        "typeId": 99,
-                        "typeName": "Environment",
-                        "id": 7823
-                    },
+
                     {
                         "typeId": 56,
                         "typeName": "Employee Time Savings 123",
@@ -314,11 +338,7 @@ def _create_common_payload(create_advanced_item, summary, status="NEW"):
                             }
                         ]
                     },
-                    {
-                        "typeId": 59,
-                        "typeName": "Quality Improvement",
-                        "id": 7825
-                    },
+
                     {
                         "typeId": 84,
                         "typeName": "Resource",
@@ -338,11 +358,7 @@ def _create_common_payload(create_advanced_item, summary, status="NEW"):
                             }
                         ]
                     },
-                    {
-                        "typeId": 60,
-                        "typeName": "Staff Safety",
-                        "id": 7827
-                    }
+
                 ]
             },
             "likeCount": 0,
@@ -385,16 +401,71 @@ class UpdateItem:
         assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
         print(f"Updated Author: {actual_username}")
 
+    def update_item_followers(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload["item"]["followers"][0]["id"] = 285
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_followers(self):
+        expected_username = "AndreyTest123"
+        actual_username = self.response["item"]["followers"][0]["username"]
+        assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
+        print(f"Updated follower: {actual_username}")
+
+    def update_item_sponsors(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload["item"]["sponsors"][0]["id"] = 285
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_sponsors(self):
+        expected_username = "AndreyTest123"
+        actual_username = self.response["item"]["sponsors"][0]["username"]
+        assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
+        print(f"Updated sponsor: {actual_username}")
+
+    def update_item_leaders(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload["item"]["leaders"][0]["id"] = 285
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_leaders(self):
+        expected_username = "AndreyTest123"
+        actual_username = self.response["item"]["leaders"][0]["username"]
+        assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
+        print(f"Updated leader: {actual_username}")
+
+    def update_item_participants(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload["item"]["participants"][0]["id"] = 285
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_participants(self):
+        expected_username = "AndreyTest123"
+        actual_username = self.response["item"]["participants"][0]["username"]
+        assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
+        print(f"Updated participants: {actual_username}")
+
+    def update_item_facilitators(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload["item"]["facilitators"][0]["id"] = 285
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_facilitators(self):
+        expected_username = "AndreyTest123"
+        actual_username = self.response["item"]["facilitators"][0]["username"]
+        assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
+        print(f"Updated facilitators: {actual_username}")
+
     # --------------------------------------------------------------------------
     def update_item_status_active(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="ACTIVE")
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", customStatus="ACTIVE")
         payload["item"]["createDate"] = "2024-02-20T04:42:09.000+0000"
         payload["item"]["startDate"] = "2024-02-20T04:56:10.000+0000"
         self._make_api_request(create_advanced_item, payload)
 
     def check_updated_status_active(self):
         expected_status = "ACTIVE"
-        actual_status = self.response['item']['status']
+        actual_status = self.response['item']['customStatus']
         assert actual_status == expected_status, f"Test FAILED: Summary mismatch. Expected: {expected_status}, Actual: {actual_status}"
         print(f"Updated Status: {actual_status}")
 
@@ -520,20 +591,40 @@ class UpdateItem:
         self._make_api_request(create_advanced_item, payload)
 
     def check_update_originating_location(self):
-        expected = "Dallas"
+        expected = "New York"
         actual = self.response["item"]["originatingLocations"][0]["name"]
         assert actual == expected, f"Test FAILED: value mismatch. Expected: {expected}, Actual: {actual}"
         print(f"Updated Originating Location: {actual}")
 
+    def update_all_impact_amounts(self, create_advanced_item, new_amount):
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api 123XXXX")
+        impacts = payload["item"]["resolutionActual"]["impacts"]
+        for impact in impacts:
+            impact["amount"] = new_amount
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_update_all_impacts(self):
+        expected = 25
+        impacts = self.response["item"]["resolutionActual"]["impacts"]
+        for impact in impacts:
+            if "amount" in impact:
+                assert impact[
+                           "amount"] == expected, f"Test FAILED: value mismatch. Expected: {expected}, Actual: {impact['amount']}"
+            else:
+                print(f"Skipping impact without 'amount' key: {impact}")
+        print("All impact amounts have been updated successfully.")
+
     # ------------------------------------------------------------------------------
     def _make_api_request(self, create_advanced_item, payload):
         credentials = ApiCredentials()
-        self.response = requests.put(f"https://test2.kainexus.com/api/public/v1/json/item?id={create_advanced_item}",
-                                     auth=HTTPBasicAuth(credentials.username, credentials.password),
-                                     json=payload).json()
+        self.response = requests.put(
+            f"https://test2.kainexus.com/api/public/v1/json/item?id={create_advanced_item}",
+            auth=HTTPBasicAuth(credentials.username, credentials.password),
+            json=payload).json()
         print(self.response)
         assert self.response['success'] is True
         assert self.response['results'][0]['id'] == create_advanced_item
         assert self.response['results'][0]['operation'] == 'UPDATE'
-        self.response = requests.get(f"https://test2.kainexus.com/api/public/v1/json/item?id={create_advanced_item}",
-                                     auth=HTTPBasicAuth(credentials.username, credentials.password)).json()
+        self.response = requests.get(
+            f"https://test2.kainexus.com/api/public/v1/json/item?id={create_advanced_item}",
+            auth=HTTPBasicAuth(credentials.username, credentials.password)).json()

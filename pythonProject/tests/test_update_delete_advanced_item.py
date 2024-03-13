@@ -19,16 +19,46 @@ def test_update_item_summary(creating_and_deleting_item):
     update_item.check_updated_summary()
 
 
+def test_updated_status(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_status_active(creating_and_deleting_item)
+    update_item.check_updated_status_active()
+
+
 def test_update_item_author(creating_and_deleting_item):
     update_item = UpdateItem()
     update_item.update_item_author(creating_and_deleting_item)
     update_item.check_updated_author()
 
 
-def test_update_item_status_active(creating_and_deleting_item):
+def test_update_item_followers(creating_and_deleting_item):
     update_item = UpdateItem()
-    update_item.update_item_status_active(creating_and_deleting_item)
-    update_item.check_updated_status_active()
+    update_item.update_item_followers(creating_and_deleting_item)
+    update_item.check_updated_followers()
+
+
+def test_update_item_sponsors(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_sponsors(creating_and_deleting_item)
+    update_item.check_updated_sponsors()
+
+
+def test_updated_leaders(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_leaders(creating_and_deleting_item)
+    update_item.check_updated_leaders()
+
+
+def test_updated_participants(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_participants(creating_and_deleting_item)
+    update_item.check_updated_participants()
+
+
+def test_updated_facilitators(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_facilitators(creating_and_deleting_item)
+    update_item.check_updated_facilitators()
 
 
 def test_update_item_text_area(creating_and_deleting_item):
@@ -82,20 +112,13 @@ def test_update_responsible_location(creating_and_deleting_item):
 
 def test_update_originating_location(creating_and_deleting_item):
     update_item_instance = UpdateItem()
-    new_originating_location = "Dallas"
+    new_originating_location = "New York"
     update_item_instance.update_originating_location(creating_and_deleting_item, new_originating_location)
     update_item_instance.check_update_originating_location()
 
-# def test_update_originating_and_responsible_locations(creating_item):
-#     update_item_instance = UpdateItem()
-#     create_item_id = creating_item.create_advanced_item()
-#     new_originating_location = "Dallas"
-#
-#     update_item_instance.update_originating_location(create_item_id, new_originating_location)
-#
-#     update_item_instance.check_update_responsible_location()
-#     new_responsible_location = "New York"
-#     update_item_instance.check_update_responsible_location(new_responsible_location)
-#     update_item_instance.check_update_originating_location()
-#     # delete = CreateItem()
-#     # delete.delete_advanced_item(create_item_id)
+
+def test_update_all_impact_amounts(creating_and_deleting_item):
+    update_item_instance = UpdateItem()
+    new_amount = 25
+    update_item_instance.update_all_impact_amounts(creating_and_deleting_item, new_amount)
+    update_item_instance.check_update_all_impacts()

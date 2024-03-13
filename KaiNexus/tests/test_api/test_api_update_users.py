@@ -231,7 +231,7 @@ def test_add_multiple_author(obj_id, api_credentials):
         }
     }
 
-    new_authors = ["AndreyTest123", "Showroom", "A&P"]  # Add as many authors as needed
+    new_authors = ["AndreyTest123", "Showroom", "A&P"]  # Add authors
 
     test_add_multiple_author(json_data, new_authors)
     print(json_data)
