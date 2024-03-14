@@ -1,6 +1,6 @@
 import pytest
-# from endpoints.update_standard_items import UpdateItem
-from endpoints.base_endpoints import CreateItem, DeleteItem, UpdateItem
+from endpoints.update_standard_items import UpdateItem
+from endpoints.base_endpoints import CreateItem, DeleteItem
 
 
 @pytest.fixture
@@ -8,8 +8,8 @@ def creating_and_deleting_item():
     create_item = CreateItem()
     created_item_id = create_item.create_standard_item()
     yield created_item_id
-    delete_item = DeleteItem()
-    delete_item.delete_item(created_item_id)
+    # delete_item = DeleteItem()
+    # # delete_item.delete_item(created_item_id)
 
 
 # ---------------------------------------------------------------
@@ -23,6 +23,30 @@ def test_update_item_author(creating_and_deleting_item):
     update_item = UpdateItem()
     update_item.update_item_author(creating_and_deleting_item)
     update_item.check_updated_author()
+
+
+def test_update_item_collaborator(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_collaborator(creating_and_deleting_item)
+    update_item.check_updated_collaborator()
+
+
+def test_update_item_responsible(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_responsible(creating_and_deleting_item)
+    update_item.check_updated_responsible()
+
+
+def test_update_item_assigner(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_assigner(creating_and_deleting_item)
+    update_item.check_updated_assigner()
+
+
+def test_update_item_followers(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_followers(creating_and_deleting_item)
+    update_item.check_updated_followers()
 
 
 def test_update_item_status_active(creating_and_deleting_item):

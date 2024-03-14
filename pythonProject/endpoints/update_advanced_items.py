@@ -390,6 +390,38 @@ class UpdateItem:
         print(f"Updated summary: {actual_summary}")
 
     # --------------------------------------------------------------------------
+
+    def update_item_team(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload["item"]["authors"][0]["id"] = 285
+        payload["item"]["followers"][0]["id"] = 285
+        payload["item"]["sponsors"][0]["id"] = 285
+        payload["item"]["leaders"][0]["id"] = 285
+        payload["item"]["participants"][0]["id"] = 285
+        payload["item"]["facilitators"][0]["id"] = 285
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_team(self):
+        expected_username = "AndreyTest123"
+        actual_username_authors = self.response["item"]["authors"][0]["username"]
+        actual_username_followers = self.response["item"]["followers"][0]["username"]
+        actual_username_sponsors = self.response["item"]["sponsors"][0]["username"]
+        actual_username_leaders = self.response["item"]["leaders"][0]["username"]
+        actual_username_participants = self.response["item"]["participants"][0]["username"]
+        actual_username_facilitators = self.response["item"]["facilitators"][0]["username"]
+        assert actual_username_authors == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username_authors}"
+        print(f"Updated Author: {actual_username_authors}")
+        assert actual_username_followers == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username_followers}"
+        print(f"Updated follower: {actual_username_followers}")
+        assert actual_username_sponsors == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username_sponsors}"
+        print(f"Updated sponsor: {actual_username_sponsors}")
+        assert actual_username_leaders == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username_leaders}"
+        print(f"Updated leader: {actual_username_leaders}")
+        assert actual_username_participants == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username_participants}"
+        print(f"Updated participant: {actual_username_participants}")
+        assert actual_username_facilitators == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username_facilitators}"
+        print(f"Updated facilitator: {actual_username_facilitators}")
+
     def update_item_author(self, create_advanced_item):
         payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
         payload["item"]["authors"][0]["id"] = 285

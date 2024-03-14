@@ -12,7 +12,13 @@ def creating_and_deleting_item():
     delete_item.delete_item(created_item_id)
 
 
-# ---------------------------------------------------------------
+# --------------ALL team update-------------------------------------------------
+def test_update_item_team(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_team(creating_and_deleting_item)
+    update_item.check_updated_team()
+
+
 def test_update_item_summary(creating_and_deleting_item):
     update_item = UpdateItem()
     update_item.update_item_summary(creating_and_deleting_item)
@@ -24,7 +30,7 @@ def test_updated_status(creating_and_deleting_item):
     update_item.update_item_status_active(creating_and_deleting_item)
     update_item.check_updated_status_active()
 
-
+# -------------------Team update by user----------------------------------------
 def test_update_item_author(creating_and_deleting_item):
     update_item = UpdateItem()
     update_item.update_item_author(creating_and_deleting_item)
