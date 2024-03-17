@@ -8,8 +8,8 @@ def creating_and_deleting_item():
     create_item = CreateItem()
     created_item_id = create_item.create_standard_item()
     yield created_item_id
-    # delete_item = DeleteItem()
-    # # delete_item.delete_item(created_item_id)
+    delete_item = DeleteItem()
+    delete_item.delete_item(created_item_id)
 
 
 # ---------------------------------------------------------------

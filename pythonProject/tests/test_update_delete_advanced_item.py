@@ -3,7 +3,7 @@ from endpoints.update_advanced_items import UpdateItem
 from endpoints.base_endpoints import CreateItem, DeleteItem
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def creating_and_deleting_item():
     create_item = CreateItem()
     created_item_id = create_item.create_advanced_item()
@@ -29,6 +29,7 @@ def test_updated_status(creating_and_deleting_item):
     update_item = UpdateItem()
     update_item.update_item_status_active(creating_and_deleting_item)
     update_item.check_updated_status_active()
+
 
 # -------------------Team update by user----------------------------------------
 def test_update_item_author(creating_and_deleting_item):

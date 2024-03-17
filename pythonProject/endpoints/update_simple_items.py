@@ -1,6 +1,7 @@
 import requests
 from requests.auth import HTTPBasicAuth
 from conftest import ApiCredentials
+from endpoints.base_endpoints import current_timestamp, future_timestamp
 
 
 def _create_common_payload(create_simple_item, summary, status="NEW", customStatus="ACTIVE"):
@@ -116,11 +117,10 @@ def _create_common_payload(create_simple_item, summary, status="NEW", customStat
                     "name": "KaiNexus  Main Location"
                 }
             ],
-            "createDate": "2024-02-21T00:11:20.000+0000",
-            "startDate": "2024-02-24T23:15:42.000+0000",
-
-            "assignDate": "2024-02-24T23:15:52.000+0000",
-            "dueDate": "2024-03-30T05:59:59.000+0000",
+            "createDate": current_timestamp(),
+            "startDate": current_timestamp(),
+            "assignDate": current_timestamp(),
+            "dueDate": future_timestamp(),
             "lastUpdateDate": "2024-02-24T23:17:57.000+0000",
             "resolutionActual": {
                 "result": "CHANGE",
@@ -439,14 +439,14 @@ class UpdateItem:
     # ----needs responsible----------------------------------------------------------------------
     def update_item_status_active(self, create_simple_item):
         payload = _create_common_payload(create_simple_item, "Auto Created item Api", status="ACTIVE")
-        payload["item"]["createDate"] = "2024-02-20T04:42:09.000+0000"
-        payload["item"]["startDate"] = "2024-02-20T04:56:10.000+0000"
+        payload["item"]["createDate"] = current_timestamp()
+        payload["item"]["startDate"] = current_timestamp()
         self._make_api_request(create_simple_item, payload)
 
     def check_updated_status_active(self):
-        expected_status = "ACTIVE"
-        actual_status = self.response['item']['status']
-        assert actual_status == expected_status, f"Test FAILED: Summary mismatch. Expected: {expected_status}, Actual: {actual_status}"
+        expected_customStatus = "ACTIVE"
+        actual_status = self.response['item']['customStatus']
+        assert actual_status == expected_customStatus, f"Test FAILED: Summary mismatch. Expected: {expected_customStatus}, Actual: {actual_status}"
         print(f"Updated Status: {actual_status}")
 
     # Updating Fields-------------------------------------------------------------------------------

@@ -455,7 +455,7 @@ class CreateItem:
                         "name": "KaiNexus  Main Location"
                     }
                 ],
-                "createDate": "2024-02-21T00:11:20.000+0000",
+                "createDate": current_timestamp(),
                 "lastUpdateDate": "2024-02-23T04:12:32.000+0000",
                 "resolutionActual": {
                     "result": "CHANGE",
