@@ -8,8 +8,8 @@ def creating_and_deleting_item():
     create_item = CreateItem()
     created_item_id = create_item.create_standard_item()
     yield created_item_id
-    delete_item = DeleteItem()
-    delete_item.delete_item(created_item_id)
+    # delete_item = DeleteItem()
+    # delete_item.delete_item(created_item_id)
 
 
 # ---------------------------------------------------------------
@@ -116,3 +116,4 @@ def test_update_all_impact_amounts(creating_and_deleting_item):
     new_amount = 25
     update_item_instance.update_all_impact_amounts(creating_and_deleting_item, new_amount)
     update_item_instance.check_update_all_impacts()
+ƒ

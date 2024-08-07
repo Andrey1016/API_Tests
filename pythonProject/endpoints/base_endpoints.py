@@ -1,4 +1,5 @@
 from datetime import datetime, timezone, timedelta
+
 from pkg_resources import iter_entry_points
 import requests
 from requests.auth import HTTPBasicAuth
@@ -98,164 +99,15 @@ class CreateItem:
                         "name": "KaiNexus  Main Location"
                     }
                 ],
-                "createDate": "2024-02-21T00:11:20.000+0000",
+                "createDate": current_timestamp(),
                 "lastUpdateDate": "2024-02-21T23:45:45.000+0000",
                 "resolutionActual": {
                     "result": "CHANGE",
                     "impacts": [
                         {
-                            "typeId": 57,
-                            "typeName": "Cost Savings",
-                            "id": 7809,
-                            "title": "Cost Savings",
-                            "comment": "",
-                            "valueType": "ONE_TIME",
-                            "amount": 10.0,
-                            "currencyCode": "USD",
-                            "locations": [
-                                {
-                                    "id": 581,
-                                    "name": "KaiNexus  Main Location"
-                                }
-                            ]
-                        },
-                        {
-                            "typeId": 120,
-                            "typeName": "Environmental Impact",
-                            "id": 7810,
-                            "comment": "",
-                            "valueType": "ONE_TIME",
-                            "amount": 10.0,
-                            "currencyCode": "USD",
-                            "personProductServiceResource": "Environmental Impact 1",
-                            "personProductServiceResourceId": 105,
-                            "unitValueRate": 1.0,
-                            "calculatedValue": 10.0,
-                            "locations": [
-                                {
-                                    "id": 581,
-                                    "name": "KaiNexus  Main Location"
-                                }
-                            ]
-                        },
-                        {
-                            "typeId": 119,
-                            "typeName": "Waste",
-                            "id": 7811,
-                            "comment": "",
-                            "valueType": "ONE_TIME",
-                            "amount": 10.0,
-                            "currencyCode": "USD",
-                            "personProductServiceResource": "Waste 1",
-                            "personProductServiceResourceId": 103,
-                            "unitValueRate": 1.0,
-                            "calculatedValue": 10.0,
-                            "locations": [
-                                {
-                                    "id": 581,
-                                    "name": "KaiNexus  Main Location"
-                                }
-                            ]
-                        },
-                        {
-                            "typeId": 102,
-                            "typeName": "Cycle Time",
-                            "id": 7812,
-                            "comment": "",
-                            "valueType": "ONE_TIME",
-                            "amount": 10.0,
-                            "amountTimeUnit": "HOUR",
-                            "currencyCode": "USD",
-                            "personProductServiceResource": "Cash-to-Cash Time",
-                            "personProductServiceResourceId": 36,
-                            "unitValueRate": 1.0,
-                            "calculatedValue": 10.0,
-                            "locations": [
-                                {
-                                    "id": 581,
-                                    "name": "KaiNexus  Main Location"
-                                }
-                            ]
-                        },
-                        {
-                            "typeId": 83,
-                            "typeName": "Product",
-                            "id": 7813,
-                            "comment": "",
-                            "valueType": "ONE_TIME",
-                            "amount": 10.0,
-                            "currencyCode": "USD",
-                            "personProductServiceResource": "Computers",
-                            "personProductServiceResourceId": 50,
-                            "unitValueRate": 2.0,
-                            "calculatedValue": 20.0,
-                            "locations": [
-                                {
-                                    "id": 581,
-                                    "name": "KaiNexus  Main Location"
-                                }
-                            ]
-                        },
-                        {
-                            "typeId": 58,
-                            "typeName": "Revenue Generation",
-                            "id": 7814,
-                            "title": "Revenue Generation",
-                            "comment": "",
-                            "valueType": "ONE_TIME",
-                            "amount": 10.0,
-                            "currencyCode": "USD",
-                            "locations": [
-                                {
-                                    "id": 581,
-                                    "name": "KaiNexus  Main Location"
-                                }
-                            ]
-                        },
-                        {
-                            "typeId": 90,
-                            "typeName": "Cost Avoidance",
-                            "id": 7815,
-                            "title": "Cost Avoidance",
-                            "valueType": "ONE_TIME",
-                            "amount": 10.0,
-                            "currencyCode": "USD",
-                            "locations": [
-                                {
-                                    "id": 581,
-                                    "name": "KaiNexus  Main Location"
-                                }
-                            ]
-                        },
-                        {
-                            "typeId": 64,
-                            "typeName": "Patient Satisfaction",
-                            "id": 7816
-                        },
-                        {
-                            "typeId": 107,
-                            "typeName": "Takt time",
-                            "id": 7817,
-                            "comment": "",
-                            "valueType": "ONE_TIME",
-                            "amount": 10.0,
-                            "amountTimeUnit": "HOUR",
-                            "currencyCode": "USD",
-                            "personProductServiceResource": "Delivery Time",
-                            "personProductServiceResourceId": 39,
-                            "unitValueRate": 2.0,
-                            "calculatedValue": 20.0,
-                            "locations": [
-                                {
-                                    "id": 581,
-                                    "name": "KaiNexus  Main Location"
-                                }
-                            ]
-                        },
-                        {
                             "typeId": 101,
                             "typeName": "Lead Time",
-                            "id": 7818,
+                            "id": 48711,
                             "comment": "",
                             "valueType": "ONE_TIME",
                             "amount": 10.0,
@@ -273,25 +125,29 @@ class CreateItem:
                             ]
                         },
                         {
-                            "typeId": 62,
-                            "typeName": "Patient Safety",
-                            "id": 7819
+                            "typeId": 119,
+                            "typeName": "Waste",
+                            "id": 48712,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Waste 1",
+                            "personProductServiceResourceId": 103,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
                         },
                         {
-                            "typeId": 65,
-                            "typeName": "Staff Satisfaction",
-                            "id": 7820
-                        },
-                        {
-                            "typeId": 100,
-                            "typeName": "Health",
-                            "id": 7821
-                        },
-                        {
-                            "typeId": 105,
-                            "typeName": "Cost Savings (Location Splitting)",
-                            "id": 7822,
-                            "title": "Cost Savings (Location Splitting)",
+                            "typeId": 58,
+                            "typeName": "Revenue Generation",
+                            "id": 48715,
+                            "title": "Revenue Generation",
                             "comment": "",
                             "valueType": "ONE_TIME",
                             "amount": 10.0,
@@ -304,14 +160,45 @@ class CreateItem:
                             ]
                         },
                         {
-                            "typeId": 99,
-                            "typeName": "Environment",
-                            "id": 7823
+                            "typeId": 107,
+                            "typeName": "Takt time",
+                            "id": 48716,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Delivery Time",
+                            "personProductServiceResourceId": 39,
+                            "unitValueRate": 2.0,
+                            "calculatedValue": 20.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 57,
+                            "typeName": "Cost Savings",
+                            "id": 48717,
+                            "title": "Cost Savings",
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
                         },
                         {
                             "typeId": 56,
                             "typeName": "Employee Time Savings 123",
-                            "id": 7824,
+                            "id": 48719,
                             "comment": "",
                             "valueType": "ONE_TIME",
                             "amount": 10.0,
@@ -330,14 +217,24 @@ class CreateItem:
                             ]
                         },
                         {
-                            "typeId": 59,
-                            "typeName": "Quality Improvement",
-                            "id": 7825
+                            "typeId": 90,
+                            "typeName": "Cost Avoidance",
+                            "id": 48722,
+                            "title": "Cost Avoidance",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
                         },
                         {
                             "typeId": 84,
                             "typeName": "Resource",
-                            "id": 7826,
+                            "id": 48723,
                             "comment": "",
                             "valueType": "ONE_TIME",
                             "amount": 10.0,
@@ -354,9 +251,843 @@ class CreateItem:
                             ]
                         },
                         {
-                            "typeId": 60,
-                            "typeName": "Staff Safety",
-                            "id": 7827
+                            "typeId": 83,
+                            "typeName": "Product",
+                            "id": 48724,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Computers",
+                            "personProductServiceResourceId": 50,
+                            "unitValueRate": 2.0,
+                            "calculatedValue": 20.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 105,
+                            "typeName": "Cost Savings (Location Splitting)",
+                            "id": 48725,
+                            "title": "Cost Savings (Location Splitting)",
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 102,
+                            "typeName": "Cycle Time",
+                            "id": 48727,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Cash-to-Cash Time",
+                            "personProductServiceResourceId": 36,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 120,
+                            "typeName": "Environmental Impact",
+                            "id": 48728,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Environmental Impact 1",
+                            "personProductServiceResourceId": 105,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        }
+                    ],
+                    "investments": [
+                        {
+                            "typeId": 87,
+                            "typeName": "Resource",
+                            "id": 48713,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Resource A",
+                            "personProductServiceResourceId": 52,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 112,
+                            "typeName": "Test cycle time",
+                            "id": 48714,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Production Time",
+                            "personProductServiceResourceId": 34,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 114,
+                            "typeName": "Test takt time",
+                            "id": 48718,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Delivery Time",
+                            "personProductServiceResourceId": 39,
+                            "unitValueRate": 2.0,
+                            "calculatedValue": 30.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 85,
+                            "typeName": "Financial Investment (Financial)",
+                            "id": 48720,
+                            "title": "Financial Investment (Financial)",
+                            "comment": "test",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "currencyCode": "USD"
+                        },
+                        {
+                            "typeId": 113,
+                            "typeName": "Test lead time",
+                            "id": 48721,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Manufacturing",
+                            "personProductServiceResourceId": 29,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 86,
+                            "typeName": "Man Hours (Time)",
+                            "id": 48726,
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Engineer",
+                            "personProductServiceResourceId": 25,
+                            "numberOfPeople": 1.0,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0
+                        }
+                    ]
+                },
+                "resolutionTarget": {
+                    "result": "CHANGE",
+                    "impacts": [
+                        {
+                            "typeId": 107,
+                            "typeName": "Takt time",
+                            "id": 48747,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Delivery Time",
+                            "personProductServiceResourceId": 39,
+                            "unitValueRate": 2.0,
+                            "calculatedValue": 20.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 90,
+                            "typeName": "Cost Avoidance",
+                            "id": 48750,
+                            "title": "Cost Avoidance",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 119,
+                            "typeName": "Waste",
+                            "id": 48752,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Waste 1",
+                            "personProductServiceResourceId": 103,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 102,
+                            "typeName": "Cycle Time",
+                            "id": 48753,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Cash-to-Cash Time",
+                            "personProductServiceResourceId": 36,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 56,
+                            "typeName": "Employee Time Savings 123",
+                            "id": 48755,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Engineer",
+                            "personProductServiceResourceId": 25,
+                            "numberOfPeople": 1.0,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 83,
+                            "typeName": "Product",
+                            "id": 48756,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Computers",
+                            "personProductServiceResourceId": 50,
+                            "unitValueRate": 2.0,
+                            "calculatedValue": 20.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 58,
+                            "typeName": "Revenue Generation",
+                            "id": 48757,
+                            "title": "Revenue Generation",
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 57,
+                            "typeName": "Cost Savings",
+                            "id": 48758,
+                            "title": "Cost Savings",
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 84,
+                            "typeName": "Resource",
+                            "id": 48759,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Resource A",
+                            "personProductServiceResourceId": 52,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 101,
+                            "typeName": "Lead Time",
+                            "id": 48761,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Manufacturing",
+                            "personProductServiceResourceId": 29,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 120,
+                            "typeName": "Environmental Impact",
+                            "id": 48763,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Environmental Impact 1",
+                            "personProductServiceResourceId": 105,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 105,
+                            "typeName": "Cost Savings (Location Splitting)",
+                            "id": 48764,
+                            "title": "Cost Savings (Location Splitting)",
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        }
+                    ],
+                    "investments": [
+                        {
+                            "typeId": 113,
+                            "typeName": "Test lead time",
+                            "id": 48748,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Manufacturing",
+                            "personProductServiceResourceId": 29,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 87,
+                            "typeName": "Resource",
+                            "id": 48749,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Resource A",
+                            "personProductServiceResourceId": 52,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 85,
+                            "typeName": "Financial Investment (Financial)",
+                            "id": 48751,
+                            "title": "Financial Investment (Financial)",
+                            "comment": "test",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "currencyCode": "USD"
+                        },
+                        {
+                            "typeId": 114,
+                            "typeName": "Test takt time",
+                            "id": 48754,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Delivery Time",
+                            "personProductServiceResourceId": 39,
+                            "unitValueRate": 2.0,
+                            "calculatedValue": 30.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 86,
+                            "typeName": "Man Hours (Time)",
+                            "id": 48760,
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Engineer",
+                            "personProductServiceResourceId": 25,
+                            "numberOfPeople": 1.0,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0
+                        },
+                        {
+                            "typeId": 112,
+                            "typeName": "Test cycle time",
+                            "id": 48762,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Production Time",
+                            "personProductServiceResourceId": 34,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "resolutionForecast": {
+                    "result": "CHANGE",
+                    "impacts": [
+                        {
+                            "typeId": 58,
+                            "typeName": "Revenue Generation",
+                            "id": 48737,
+                            "title": "Revenue Generation",
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 105,
+                            "typeName": "Cost Savings (Location Splitting)",
+                            "id": 48738,
+                            "title": "Cost Savings (Location Splitting)",
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 56,
+                            "typeName": "Employee Time Savings 123",
+                            "id": 48739,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Engineer",
+                            "personProductServiceResourceId": 25,
+                            "numberOfPeople": 1.0,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 57,
+                            "typeName": "Cost Savings",
+                            "id": 48741,
+                            "title": "Cost Savings",
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 107,
+                            "typeName": "Takt time",
+                            "id": 48742,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Delivery Time",
+                            "personProductServiceResourceId": 39,
+                            "unitValueRate": 2.0,
+                            "calculatedValue": 20.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 102,
+                            "typeName": "Cycle Time",
+                            "id": 48745,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Cash-to-Cash Time",
+                            "personProductServiceResourceId": 36,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 120,
+                            "typeName": "Environmental Impact",
+                            "id": 48746,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Environmental Impact 1",
+                            "personProductServiceResourceId": 105,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 119,
+                            "typeName": "Waste",
+                            "id": 48730,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Waste 1",
+                            "personProductServiceResourceId": 103,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 90,
+                            "typeName": "Cost Avoidance",
+                            "id": 48731,
+                            "title": "Cost Avoidance",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 101,
+                            "typeName": "Lead Time",
+                            "id": 48732,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Manufacturing",
+                            "personProductServiceResourceId": 29,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 84,
+                            "typeName": "Resource",
+                            "id": 48733,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Resource A",
+                            "personProductServiceResourceId": 52,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 10.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 83,
+                            "typeName": "Product",
+                            "id": 48734,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 10.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Computers",
+                            "personProductServiceResourceId": 50,
+                            "unitValueRate": 2.0,
+                            "calculatedValue": 20.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        }
+                    ],
+                    "investments": [
+                        {
+                            "typeId": 112,
+                            "typeName": "Test cycle time",
+                            "id": 48736,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Production Time",
+                            "personProductServiceResourceId": 34,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 85,
+                            "typeName": "Financial Investment (Financial)",
+                            "id": 48740,
+                            "title": "Financial Investment (Financial)",
+                            "comment": "test",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "currencyCode": "USD"
+                        },
+                        {
+                            "typeId": 114,
+                            "typeName": "Test takt time",
+                            "id": 48743,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Delivery Time",
+                            "personProductServiceResourceId": 39,
+                            "unitValueRate": 2.0,
+                            "calculatedValue": 30.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 113,
+                            "typeName": "Test lead time",
+                            "id": 48744,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Manufacturing",
+                            "personProductServiceResourceId": 29,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 87,
+                            "typeName": "Resource",
+                            "id": 48729,
+                            "comment": "",
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Resource A",
+                            "personProductServiceResourceId": 52,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0,
+                            "locations": [
+                                {
+                                    "id": 581,
+                                    "name": "KaiNexus  Main Location"
+                                }
+                            ]
+                        },
+                        {
+                            "typeId": 86,
+                            "typeName": "Man Hours (Time)",
+                            "id": 48735,
+                            "valueType": "ONE_TIME",
+                            "amount": 15.0,
+                            "amountTimeUnit": "HOUR",
+                            "currencyCode": "USD",
+                            "personProductServiceResource": "Engineer",
+                            "personProductServiceResourceId": 25,
+                            "numberOfPeople": 1.0,
+                            "unitValueRate": 1.0,
+                            "calculatedValue": 15.0
                         }
                     ]
                 },
@@ -876,7 +1607,7 @@ class CreateItem:
                         "name": "KaiNexus  Main Location"
                     }
                 ],
-                "createDate": "2024-02-21T00:11:20.000+0000",
+                "createDate": current_timestamp(),
                 "startDate": "2024-02-24T23:15:42.000+0000",
                 "assignDate": "2024-02-24T23:15:52.000+0000",
                 "dueDate": "2024-02-24T23:15:52.000+0000",
@@ -1173,6 +1904,7 @@ class DeleteItem:
                 "id": create_advanced_item,
                 # "summary": "Auto Created item Api",
                 "status": "DELETED",
+
                 "authors": [
                     {
                         "id": 211,

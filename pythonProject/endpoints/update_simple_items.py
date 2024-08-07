@@ -4,7 +4,7 @@ from conftest import ApiCredentials
 from endpoints.base_endpoints import current_timestamp, future_timestamp
 
 
-def _create_common_payload(create_simple_item, summary, status="NEW", customStatus="ACTIVE"):
+def _create_common_payload(create_simple_item, summary, status="NEW", customStatus="NEW"):
     return {
         "item": {
             "templateId": 464,
@@ -382,7 +382,7 @@ class UpdateItem:
 
     # --------------------------------------------------------------------------
     def update_item_author(self, create_simple_item):
-        payload = _create_common_payload(create_simple_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_simple_item, "Auto Created item Api Update Author", status="NEW")
         payload["item"]["authors"][0]["id"] = 285
         self._make_api_request(create_simple_item, payload)
 
@@ -438,14 +438,14 @@ class UpdateItem:
 
     # ----needs responsible----------------------------------------------------------------------
     def update_item_status_active(self, create_simple_item):
-        payload = _create_common_payload(create_simple_item, "Auto Created item Api", status="ACTIVE")
+        payload = _create_common_payload(create_simple_item, "Auto Created item Api", customStatus="ACTIVE")
         payload["item"]["createDate"] = current_timestamp()
         payload["item"]["startDate"] = current_timestamp()
         self._make_api_request(create_simple_item, payload)
 
     def check_updated_status_active(self):
         expected_customStatus = "ACTIVE"
-        actual_status = self.response['item']['customStatus']
+        actual_status = self.response['item']['status']
         assert actual_status == expected_customStatus, f"Test FAILED: Summary mismatch. Expected: {expected_customStatus}, Actual: {actual_status}"
         print(f"Updated Status: {actual_status}")
 

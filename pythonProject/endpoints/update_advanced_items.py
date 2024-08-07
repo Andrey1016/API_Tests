@@ -1,9 +1,11 @@
 import requests
 from requests.auth import HTTPBasicAuth
 from conftest import ApiCredentials
+from endpoints.base_endpoints import current_timestamp, future_timestamp
+from functools import wraps
 
 
-def _create_common_payload(create_advanced_item, summary, status="NEW", customStatus="NEW"):
+def _create_common_payload(create_advanced_item, summary, status="NEW", customStatus="PLANNED"):
     return {
         "item": {
             "templateId": 452,
@@ -129,15 +131,94 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                     "name": "KaiNexus  Main Location"
                 }
             ],
-            "createDate": "2024-02-21T00:11:20.000+0000",
-            "lastUpdateDate": "2024-02-21T23:45:45.000+0000",
+            "createDate": current_timestamp(),
+            "startDate": current_timestamp(),
+            "resolutionSubmitDate": current_timestamp(),
+            "completeDate": current_timestamp(),
+            "dueDate": future_timestamp(),
+            "lastUpdateDate": current_timestamp(),
             "resolutionActual": {
                 "result": "CHANGE",
                 "impacts": [
                     {
+                        "typeId": 101,
+                        "typeName": "Lead Time",
+                        "id": 48711,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Manufacturing",
+                        "personProductServiceResourceId": 29,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 119,
+                        "typeName": "Waste",
+                        "id": 48712,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Waste 1",
+                        "personProductServiceResourceId": 103,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 58,
+                        "typeName": "Revenue Generation",
+                        "id": 48715,
+                        "title": "Revenue Generation",
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 107,
+                        "typeName": "Takt time",
+                        "id": 48716,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Delivery Time",
+                        "personProductServiceResourceId": 39,
+                        "unitValueRate": 2.0,
+                        "calculatedValue": 20.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
                         "typeId": 57,
                         "typeName": "Cost Savings",
-                        "id": 7809,
+                        "id": 48717,
                         "title": "Cost Savings",
                         "comment": "",
                         "valueType": "ONE_TIME",
@@ -151,9 +232,119 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                         ]
                     },
                     {
+                        "typeId": 56,
+                        "typeName": "Employee Time Savings 123",
+                        "id": 48719,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Engineer",
+                        "personProductServiceResourceId": 25,
+                        "numberOfPeople": 1.0,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 90,
+                        "typeName": "Cost Avoidance",
+                        "id": 48722,
+                        "title": "Cost Avoidance",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 84,
+                        "typeName": "Resource",
+                        "id": 48723,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Resource A",
+                        "personProductServiceResourceId": 52,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 83,
+                        "typeName": "Product",
+                        "id": 48724,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Computers",
+                        "personProductServiceResourceId": 50,
+                        "unitValueRate": 2.0,
+                        "calculatedValue": 20.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 105,
+                        "typeName": "Cost Savings (Location Splitting)",
+                        "id": 48725,
+                        "title": "Cost Savings (Location Splitting)",
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 102,
+                        "typeName": "Cycle Time",
+                        "id": 48727,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Cash-to-Cash Time",
+                        "personProductServiceResourceId": 36,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
                         "typeId": 120,
                         "typeName": "Environmental Impact",
-                        "id": 7810,
+                        "id": 48728,
                         "comment": "",
                         "valueType": "ONE_TIME",
                         "amount": 10.0,
@@ -168,11 +359,156 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                                 "name": "KaiNexus  Main Location"
                             }
                         ]
+                    }
+                ],
+                "investments": [
+                    {
+                        "typeId": 87,
+                        "typeName": "Resource",
+                        "id": 48713,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Resource A",
+                        "personProductServiceResourceId": 52,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 112,
+                        "typeName": "Test cycle time",
+                        "id": 48714,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Production Time",
+                        "personProductServiceResourceId": 34,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 114,
+                        "typeName": "Test takt time",
+                        "id": 48718,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Delivery Time",
+                        "personProductServiceResourceId": 39,
+                        "unitValueRate": 2.0,
+                        "calculatedValue": 30.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 85,
+                        "typeName": "Financial Investment (Financial)",
+                        "id": 48720,
+                        "title": "Financial Investment (Financial)",
+                        "comment": "test",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "currencyCode": "USD"
+                    },
+                    {
+                        "typeId": 113,
+                        "typeName": "Test lead time",
+                        "id": 48721,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Manufacturing",
+                        "personProductServiceResourceId": 29,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 86,
+                        "typeName": "Man Hours (Time)",
+                        "id": 48726,
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Engineer",
+                        "personProductServiceResourceId": 25,
+                        "numberOfPeople": 1.0,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0
+                    }
+                ]
+            },
+            "resolutionTarget": {
+                "result": "CHANGE",
+                "impacts": [
+                    {
+                        "typeId": 107,
+                        "typeName": "Takt time",
+                        "id": 48747,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Delivery Time",
+                        "personProductServiceResourceId": 39,
+                        "unitValueRate": 2.0,
+                        "calculatedValue": 20.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 90,
+                        "typeName": "Cost Avoidance",
+                        "id": 48750,
+                        "title": "Cost Avoidance",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
                     },
                     {
                         "typeId": 119,
                         "typeName": "Waste",
-                        "id": 7811,
+                        "id": 48752,
                         "comment": "",
                         "valueType": "ONE_TIME",
                         "amount": 10.0,
@@ -191,7 +527,7 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                     {
                         "typeId": 102,
                         "typeName": "Cycle Time",
-                        "id": 7812,
+                        "id": 48753,
                         "comment": "",
                         "valueType": "ONE_TIME",
                         "amount": 10.0,
@@ -209,9 +545,30 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                         ]
                     },
                     {
+                        "typeId": 56,
+                        "typeName": "Employee Time Savings 123",
+                        "id": 48755,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Engineer",
+                        "personProductServiceResourceId": 25,
+                        "numberOfPeople": 1.0,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
                         "typeId": 83,
                         "typeName": "Product",
-                        "id": 7813,
+                        "id": 48756,
                         "comment": "",
                         "valueType": "ONE_TIME",
                         "amount": 10.0,
@@ -230,7 +587,7 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                     {
                         "typeId": 58,
                         "typeName": "Revenue Generation",
-                        "id": 7814,
+                        "id": 48757,
                         "title": "Revenue Generation",
                         "comment": "",
                         "valueType": "ONE_TIME",
@@ -244,10 +601,11 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                         ]
                     },
                     {
-                        "typeId": 90,
-                        "typeName": "Cost Avoidance",
-                        "id": 7815,
-                        "title": "Cost Avoidance",
+                        "typeId": 57,
+                        "typeName": "Cost Savings",
+                        "id": 48758,
+                        "title": "Cost Savings",
+                        "comment": "",
                         "valueType": "ONE_TIME",
                         "amount": 10.0,
                         "currencyCode": "USD",
@@ -258,20 +616,18 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                             }
                         ]
                     },
-
                     {
-                        "typeId": 107,
-                        "typeName": "Takt time",
-                        "id": 7817,
+                        "typeId": 84,
+                        "typeName": "Resource",
+                        "id": 48759,
                         "comment": "",
                         "valueType": "ONE_TIME",
                         "amount": 10.0,
-                        "amountTimeUnit": "HOUR",
                         "currencyCode": "USD",
-                        "personProductServiceResource": "Delivery Time",
-                        "personProductServiceResourceId": 39,
-                        "unitValueRate": 2.0,
-                        "calculatedValue": 20.0,
+                        "personProductServiceResource": "Resource A",
+                        "personProductServiceResourceId": 52,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
                         "locations": [
                             {
                                 "id": 581,
@@ -282,7 +638,7 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                     {
                         "typeId": 101,
                         "typeName": "Lead Time",
-                        "id": 7818,
+                        "id": 48761,
                         "comment": "",
                         "valueType": "ONE_TIME",
                         "amount": 10.0,
@@ -299,11 +655,171 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                             }
                         ]
                     },
-
+                    {
+                        "typeId": 120,
+                        "typeName": "Environmental Impact",
+                        "id": 48763,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Environmental Impact 1",
+                        "personProductServiceResourceId": 105,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
                     {
                         "typeId": 105,
                         "typeName": "Cost Savings (Location Splitting)",
-                        "id": 7822,
+                        "id": 48764,
+                        "title": "Cost Savings (Location Splitting)",
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    }
+                ],
+                "investments": [
+                    {
+                        "typeId": 113,
+                        "typeName": "Test lead time",
+                        "id": 48748,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Manufacturing",
+                        "personProductServiceResourceId": 29,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 87,
+                        "typeName": "Resource",
+                        "id": 48749,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Resource A",
+                        "personProductServiceResourceId": 52,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 85,
+                        "typeName": "Financial Investment (Financial)",
+                        "id": 48751,
+                        "title": "Financial Investment (Financial)",
+                        "comment": "test",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "currencyCode": "USD"
+                    },
+                    {
+                        "typeId": 114,
+                        "typeName": "Test takt time",
+                        "id": 48754,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Delivery Time",
+                        "personProductServiceResourceId": 39,
+                        "unitValueRate": 2.0,
+                        "calculatedValue": 30.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 86,
+                        "typeName": "Man Hours (Time)",
+                        "id": 48760,
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Engineer",
+                        "personProductServiceResourceId": 25,
+                        "numberOfPeople": 1.0,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0
+                    },
+                    {
+                        "typeId": 112,
+                        "typeName": "Test cycle time",
+                        "id": 48762,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Production Time",
+                        "personProductServiceResourceId": 34,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "resolutionForecast": {
+                "result": "CHANGE",
+                "impacts": [
+                    {
+                        "typeId": 58,
+                        "typeName": "Revenue Generation",
+                        "id": 48737,
+                        "title": "Revenue Generation",
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 105,
+                        "typeName": "Cost Savings (Location Splitting)",
+                        "id": 48738,
                         "title": "Cost Savings (Location Splitting)",
                         "comment": "",
                         "valueType": "ONE_TIME",
@@ -316,11 +832,10 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                             }
                         ]
                     },
-
                     {
                         "typeId": 56,
                         "typeName": "Employee Time Savings 123",
-                        "id": 7824,
+                        "id": 48739,
                         "comment": "",
                         "valueType": "ONE_TIME",
                         "amount": 10.0,
@@ -338,11 +853,139 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                             }
                         ]
                     },
-
+                    {
+                        "typeId": 57,
+                        "typeName": "Cost Savings",
+                        "id": 48741,
+                        "title": "Cost Savings",
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 107,
+                        "typeName": "Takt time",
+                        "id": 48742,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Delivery Time",
+                        "personProductServiceResourceId": 39,
+                        "unitValueRate": 2.0,
+                        "calculatedValue": 20.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 102,
+                        "typeName": "Cycle Time",
+                        "id": 48745,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Cash-to-Cash Time",
+                        "personProductServiceResourceId": 36,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 120,
+                        "typeName": "Environmental Impact",
+                        "id": 48746,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Environmental Impact 1",
+                        "personProductServiceResourceId": 105,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 119,
+                        "typeName": "Waste",
+                        "id": 48730,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Waste 1",
+                        "personProductServiceResourceId": 103,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 90,
+                        "typeName": "Cost Avoidance",
+                        "id": 48731,
+                        "title": "Cost Avoidance",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 101,
+                        "typeName": "Lead Time",
+                        "id": 48732,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Manufacturing",
+                        "personProductServiceResourceId": 29,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 10.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
                     {
                         "typeId": 84,
                         "typeName": "Resource",
-                        "id": 7826,
+                        "id": 48733,
                         "comment": "",
                         "valueType": "ONE_TIME",
                         "amount": 10.0,
@@ -358,7 +1001,130 @@ def _create_common_payload(create_advanced_item, summary, status="NEW", customSt
                             }
                         ]
                     },
-
+                    {
+                        "typeId": 83,
+                        "typeName": "Product",
+                        "id": 48734,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 10.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Computers",
+                        "personProductServiceResourceId": 50,
+                        "unitValueRate": 2.0,
+                        "calculatedValue": 20.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    }
+                ],
+                "investments": [
+                    {
+                        "typeId": 112,
+                        "typeName": "Test cycle time",
+                        "id": 48736,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Production Time",
+                        "personProductServiceResourceId": 34,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 85,
+                        "typeName": "Financial Investment (Financial)",
+                        "id": 48740,
+                        "title": "Financial Investment (Financial)",
+                        "comment": "test",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "currencyCode": "USD"
+                    },
+                    {
+                        "typeId": 114,
+                        "typeName": "Test takt time",
+                        "id": 48743,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Delivery Time",
+                        "personProductServiceResourceId": 39,
+                        "unitValueRate": 2.0,
+                        "calculatedValue": 30.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 113,
+                        "typeName": "Test lead time",
+                        "id": 48744,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Manufacturing",
+                        "personProductServiceResourceId": 29,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 87,
+                        "typeName": "Resource",
+                        "id": 48729,
+                        "comment": "",
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Resource A",
+                        "personProductServiceResourceId": 52,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0,
+                        "locations": [
+                            {
+                                "id": 581,
+                                "name": "KaiNexus  Main Location"
+                            }
+                        ]
+                    },
+                    {
+                        "typeId": 86,
+                        "typeName": "Man Hours (Time)",
+                        "id": 48735,
+                        "valueType": "ONE_TIME",
+                        "amount": 15.0,
+                        "amountTimeUnit": "HOUR",
+                        "currencyCode": "USD",
+                        "personProductServiceResource": "Engineer",
+                        "personProductServiceResourceId": 25,
+                        "numberOfPeople": 1.0,
+                        "unitValueRate": 1.0,
+                        "calculatedValue": 15.0
+                    }
                 ]
             },
             "likeCount": 0,
@@ -378,13 +1144,33 @@ class UpdateItem:
     response = None
     response_json = None
 
-    # --------------------------------------------------------------------------
+    # -----------"""This method for removing Impact and Investments from the every created item"""
+    def nullify_resolution_fields(self, payload, fields):
+        """Sets specified fields to None in the resolution sections of the payload."""
+        for field in fields:
+            payload["item"]["resolutionActual"][field] = None
+            payload["item"]["resolutionTarget"][field] = None
+            payload["item"]["resolutionForecast"][field] = None
+
     def update_item_summary(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api 123XXXX")
+        payload = _create_common_payload(create_advanced_item, "Auto test Updating Summary", status="NEW", customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         self._make_api_request(create_advanced_item, payload)
+        # fields_to_nullify = ["impacts", "investments"]
+        # for field in fields_to_nullify:
+        #     payload["item"]["resolutionActual"][field] = None
+        #     payload["item"]["resolutionTarget"][field] = None
+        #     payload["item"]["resolutionForecast"][field] = None
+
+    # payload["item"]["resolutionActual"]["impacts"] = None
+    # payload["item"]["resolutionTarget"]["impacts"] = None
+    # payload["item"]["resolutionForecast"]["impacts"] = None
+    # payload["item"]["resolutionActual"]["investments"] = None
+    # payload["item"]["resolutionTarget"]["investments"] = None
+    # payload["item"]["resolutionForecast"]["investments"] = None
 
     def check_updated_summary(self):
-        expected_summary = "Auto Created item Api 123XXXX"
+        expected_summary = "Auto test Updating Summary"
         actual_summary = self.response['item']['summary']
         assert actual_summary == expected_summary, f"Test FAILED: Summary mismatch. Expected: {expected_summary}, Actual: {actual_summary}"
         print(f"Updated summary: {actual_summary}")
@@ -392,13 +1178,15 @@ class UpdateItem:
     # --------------------------------------------------------------------------
 
     def update_item_team(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto test Updating Team", status="NEW",
+                                         customStatus="NEW")
         payload["item"]["authors"][0]["id"] = 285
         payload["item"]["followers"][0]["id"] = 285
         payload["item"]["sponsors"][0]["id"] = 285
         payload["item"]["leaders"][0]["id"] = 285
         payload["item"]["participants"][0]["id"] = 285
         payload["item"]["facilitators"][0]["id"] = 285
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         self._make_api_request(create_advanced_item, payload)
 
     def check_updated_team(self):
@@ -422,8 +1210,11 @@ class UpdateItem:
         assert actual_username_facilitators == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username_facilitators}"
         print(f"Updated facilitator: {actual_username_facilitators}")
 
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     def update_item_author(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api Author Update", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["authors"][0]["id"] = 285
         self._make_api_request(create_advanced_item, payload)
 
@@ -433,8 +1224,11 @@ class UpdateItem:
         assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
         print(f"Updated Author: {actual_username}")
 
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     def update_item_followers(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created item Api Followers Update", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["followers"][0]["id"] = 285
         self._make_api_request(create_advanced_item, payload)
 
@@ -444,8 +1238,11 @@ class UpdateItem:
         assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
         print(f"Updated follower: {actual_username}")
 
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     def update_item_sponsors(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Sponsor", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["sponsors"][0]["id"] = 285
         self._make_api_request(create_advanced_item, payload)
 
@@ -455,8 +1252,12 @@ class UpdateItem:
         assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
         print(f"Updated sponsor: {actual_username}")
 
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     def update_item_leaders(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Leader", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["leaders"][0]["id"] = 285
         self._make_api_request(create_advanced_item, payload)
 
@@ -466,8 +1267,12 @@ class UpdateItem:
         assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
         print(f"Updated leader: {actual_username}")
 
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     def update_item_participants(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Participants", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["participants"][0]["id"] = 285
         self._make_api_request(create_advanced_item, payload)
 
@@ -477,8 +1282,12 @@ class UpdateItem:
         assert actual_username == expected_username, f"Test FAILED: Summary mismatch. Expected: {expected_username}, Actual: {actual_username}"
         print(f"Updated participants: {actual_username}")
 
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     def update_item_facilitators(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Facilitators", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["facilitators"][0]["id"] = 285
         self._make_api_request(create_advanced_item, payload)
 
@@ -490,9 +1299,11 @@ class UpdateItem:
 
     # --------------------------------------------------------------------------
     def update_item_status_active(self, create_advanced_item):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", customStatus="ACTIVE")
-        payload["item"]["createDate"] = "2024-02-20T04:42:09.000+0000"
-        payload["item"]["startDate"] = "2024-02-20T04:56:10.000+0000"
+        payload = _create_common_payload(create_advanced_item, "Auto Created update to Active status",
+                                         customStatus="ACTIVE")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
+        payload["item"]["createDate"] = current_timestamp()
+        payload["item"]["startDate"] = current_timestamp()
         self._make_api_request(create_advanced_item, payload)
 
     def check_updated_status_active(self):
@@ -501,27 +1312,94 @@ class UpdateItem:
         assert actual_status == expected_status, f"Test FAILED: Summary mismatch. Expected: {expected_status}, Actual: {actual_status}"
         print(f"Updated Status: {actual_status}")
 
+    # --------------------------------------------------------------------------
+
+    def update_item_status_planned(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created update to Planned", status="PLANNED",
+                                         customStatus="PLANNED")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
+        payload["item"]["createDate"] = current_timestamp()
+        payload["item"]["startDate"] = None
+        payload["item"]["reviewDate"] = future_timestamp()
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_status_planned(self):
+        expected_status = "PLANNED"
+        actual_status = self.response['item']['customStatus']
+        assert actual_status == expected_status, f"Test FAILED: Summary mismatch. Expected: {expected_status}, Actual: {actual_status}"
+        print(f"Updated Status: {actual_status}")
+
+    # --------------------------------------------------------------------------
+
+    def update_item_status_resolution_submitted(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created update to Resolution Submitted status",
+                                         status="RES_SUBMITTED",
+                                         customStatus="RESOLUTION SUBMITTED")
+        payload["item"]["createDate"] = current_timestamp()
+        payload["item"]["reviewDate"] = future_timestamp()
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_status_resolution_submitted(self):
+        expected_status = "RESOLUTION SUBMITTED"
+        actual_status = self.response['item']['customStatus']
+        assert actual_status == expected_status, f"Test FAILED: Summary mismatch. Expected: {expected_status}, Actual: {actual_status}"
+        print(f"Updated Status: {actual_status}")
+
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    def update_item_status_deferred(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created update to Deferred status",
+                                         customStatus="DEFERRED")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
+        payload["item"]["createDate"] = current_timestamp()
+        payload["item"]["reviewDate"] = future_timestamp()
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_status_deferred(self):
+        expected_status = "DEFERRED"
+        actual_status = self.response['item']['customStatus']
+        assert actual_status == expected_status, f"Test FAILED: Summary mismatch. Expected: {expected_status}, Actual: {actual_status}"
+        print(f"Updated Status: {actual_status}")
+
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    def update_item_status_complete(self, create_advanced_item):
+        payload = _create_common_payload(create_advanced_item, "Auto Created update to Completed status",
+                                         customStatus="COMPLETE")
+        payload["item"]["createDate"] = current_timestamp()
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_updated_status_complete(self):
+        expected_status = "COMPLETE"
+        actual_status = self.response['item']['customStatus']
+        assert actual_status == expected_status, f"Test FAILED: Summary mismatch. Expected: {expected_status}, Actual: {actual_status}"
+        print(f"Updated Status: {actual_status}")
+
     # Updating Fields-------------------------------------------------------------------------------
 
     def update_item_text_area(self, create_advanced_item, new_text):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Text Area", status="NEW",
+                                         customStatus="NEW"
+                                         )
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["fields"][0]["value"] = new_text
         payload["item"]["fields"][0]["htmlValue"] = f"<p>{new_text}</p>"
         self._make_api_request(create_advanced_item, payload)
 
-    # --------------------------------------------------------------------------
     def check_updated_text_area(self):
         expected = "NEW text area"
         actual = self.response["item"]["fields"][0]["value"]
         assert actual == expected, f"Test FAILED: Summary mismatch. Expected: {expected}, Actual: {actual}"
         print(f"Updated Text Area: {actual}")
 
+    # --------------------------------------------------------------------------
+
     def update_item_text_field(self, create_advanced_item, new_text):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Text Field", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["fields"][1]["value"] = new_text
         self._make_api_request(create_advanced_item, payload)
-
-    # --------------------------------------------------------------------------
 
     def check_updated_text_field(self):
         expected = "NEW text field"
@@ -529,8 +1407,11 @@ class UpdateItem:
         assert actual == expected, f"Test FAILED: Summary mismatch. Expected: {expected}, Actual: {actual}"
         print(f"Updated Text Field: {actual}")
 
+    # --------------------------------------------------------------------------
     def update_item_number_field(self, create_advanced_item, new_number_value):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Number Field", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         field_index = None
         for i, field in enumerate(payload["item"]["fields"]):
             if field["name"] == "Number Field":
@@ -551,7 +1432,9 @@ class UpdateItem:
     # --------------------------------------------------------------------------
 
     def update_item_date_field(self, create_advanced_item, new_number_value):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Date Field", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         field_index = None
         for i, field in enumerate(payload["item"]["fields"]):
             if field["name"] == "Date Field":
@@ -572,7 +1455,9 @@ class UpdateItem:
     # --------------------------------------------------------------------------
 
     def update_item_date_time_field(self, create_advanced_item, new_date_value):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Date & Time field", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         field_index = None
         for i, field in enumerate(payload["item"]["fields"]):
             if field["name"] == "Date Time Field":
@@ -590,8 +1475,12 @@ class UpdateItem:
         assert actual == expected, f"Test FAILED: dateValue value mismatch. Expected: {expected}, Actual: {actual}"
         print(f"Updated Date Time Field: {actual}")
 
+    # ------------------------------------------------------------------------------
+
     def update_item_attribute_category(self, create_advanced_item, new_category):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Attribute (Category)", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         for attribute in payload["item"]["attributes"]:
             if attribute["name"] == "Category":
                 attribute["values"][0]["name"] = new_category
@@ -606,8 +1495,12 @@ class UpdateItem:
         assert actual_category == expected_category, f"Test FAILED: Category mismatch. Expected: {expected_category}, Actual: {actual_category}"
         print(f"Updated Category: {actual_category}")
 
+    # ------------------------------------------------------------------------------
+
     def update_responsible_location(self, create_advanced_item, new_responsible_location):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Responsible Location", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["responsibleLocations"][0]["name"] = new_responsible_location
         self._make_api_request(create_advanced_item, payload)
 
@@ -617,8 +1510,12 @@ class UpdateItem:
         assert actual == expected, f"Test FAILED: Numeric value mismatch. Expected: {expected}, Actual: {actual}"
         print(f"Updated Responsible Location: {actual}")
 
+    # ------------------------------------------------------------------------------
+
     def update_originating_location(self, create_advanced_item, new_originating_location):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api", status="NEW")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update Originating Location", status="NEW",
+                                         customStatus="NEW")
+        self.nullify_resolution_fields(payload, ["impacts", "investments"])
         payload["item"]["originatingLocations"][0]["name"] = new_originating_location
         self._make_api_request(create_advanced_item, payload)
 
@@ -628,8 +1525,11 @@ class UpdateItem:
         assert actual == expected, f"Test FAILED: value mismatch. Expected: {expected}, Actual: {actual}"
         print(f"Updated Originating Location: {actual}")
 
+    # ------------------------------------------------------------------------------
+
     def update_all_impact_amounts(self, create_advanced_item, new_amount):
-        payload = _create_common_payload(create_advanced_item, "Auto Created item Api 123XXXX")
+        payload = _create_common_payload(create_advanced_item, "Auto Created update all Impact Amounts",
+                                         customStatus="NEW")
         impacts = payload["item"]["resolutionActual"]["impacts"]
         for impact in impacts:
             impact["amount"] = new_amount
@@ -645,6 +1545,36 @@ class UpdateItem:
             else:
                 print(f"Skipping impact without 'amount' key: {impact}")
         print("All impact amounts have been updated successfully.")
+
+    # ------------------------------------------------------------------------------
+
+    def update_all_investment_amounts(self, create_advanced_item, new_amount):
+        payload = _create_common_payload(create_advanced_item, "Auto Created update all Investment Amounts",
+                                         customStatus="NEW")
+        investmentsA = payload["item"]["resolutionActual"]["investments"]
+        investmentsT = payload["item"]["resolutionTarget"]["investments"]
+        investmentsF = payload["item"]["resolutionForecast"]["investments"]
+        for investment_list in [investmentsA, investmentsT, investmentsF]:
+            for investment in investment_list:
+                investment["amount"] = new_amount
+        self._make_api_request(create_advanced_item, payload)
+
+    def check_update_all_investments(self, expected=35):
+        investments_sections = {
+            "Actual": self.response["item"]["resolutionActual"]["investments"],
+            "Target": self.response["item"]["resolutionTarget"]["investments"],
+            "Forecast": self.response["item"]["resolutionForecast"]["investments"],
+        }
+        for section_name, investments in investments_sections.items():
+            for investment in investments:
+                if "amount" in investment:
+                    assert investment["amount"] == expected, (
+                        f"Test FAILED in {section_name} section: value mismatch. "
+                        f"Expected: {expected}, Actual: {investment['amount']}"
+                    )
+                else:
+                    print(f"Skipping {section_name} investment without 'amount' key: {investment}")
+            print(f"All {section_name} investments amounts have been updated successfully.")
 
     # ------------------------------------------------------------------------------
     def _make_api_request(self, create_advanced_item, payload):

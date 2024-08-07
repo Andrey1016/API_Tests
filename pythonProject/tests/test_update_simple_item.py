@@ -101,8 +101,8 @@ def test_update_responsible_location(creating_item):
     new_originating_location = "Dallas"
     update_item_instance.update_responsible_location(create_item_id, new_originating_location)
     update_item_instance.check_update_responsible_location()
-    # delete = DeleteItem()
-    # delete.delete_item(create_item_id)
+    delete = DeleteItem()
+    delete.delete_item(create_item_id)
 
 
 def test_update_originating_location(creating_item):

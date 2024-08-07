@@ -4,7 +4,7 @@ from conftest import ApiCredentials
 from endpoints.base_endpoints import current_timestamp, future_timestamp
 
 
-def _create_common_payload(create_standard_item, summary, status="NEW", customStatus="ACTIVE"):
+def _create_common_payload(create_standard_item, summary, status="NEW", customStatus="NEW"):
     return {
         "item": {
             "templateId": 463,
@@ -121,7 +121,7 @@ def _create_common_payload(create_standard_item, summary, status="NEW", customSt
             "startDate": current_timestamp(),
             "assignDate": current_timestamp(),
             "dueDate": future_timestamp(),
-            "lastUpdateDate": "2024-02-23T04:12:32.000+0000",
+            "lastUpdateDate": current_timestamp(),
             "resolutionActual": {
                 "result": "CHANGE",
                 "impacts": [
@@ -468,7 +468,7 @@ class UpdateItem:
 
     # ----needs responsible----------------------------------------------------------------------
     def update_item_status_active(self, create_standard_item):
-        payload = _create_common_payload(create_standard_item, "Auto Created item Api", status="ACTIVE")
+        payload = _create_common_payload(create_standard_item, "Auto Created item Api", customStatus="ACTIVE")
         payload["item"]["createDate"] = current_timestamp()
         payload["item"]["startDate"] = current_timestamp()
         self._make_api_request(create_standard_item, payload)
@@ -621,7 +621,7 @@ class UpdateItem:
                 assert impact[
                            "amount"] == expected, f"Test FAILED: value mismatch. Expected: {expected}, Actual: {impact['amount']}"
             else:
-                print(f"Skipping impact without 'amount' key: {impact}")
+                print(f"Skipping impact without 'amount': {impact}")
         print("All impact amounts have been updated successfully.")
 
     # ------------------------------------------------------------------------------

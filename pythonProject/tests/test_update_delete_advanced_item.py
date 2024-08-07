@@ -25,10 +25,34 @@ def test_update_item_summary(creating_and_deleting_item):
     update_item.check_updated_summary()
 
 
-def test_updated_status(creating_and_deleting_item):
+def test_updated_status_to_active(creating_and_deleting_item):
     update_item = UpdateItem()
     update_item.update_item_status_active(creating_and_deleting_item)
     update_item.check_updated_status_active()
+
+
+def test_updated_status_to_deferred(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_status_deferred(creating_and_deleting_item)
+    update_item.check_updated_status_deferred()
+
+
+def test_updated_status_to_planned(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_status_planned(creating_and_deleting_item)
+    update_item.check_updated_status_planned()
+
+
+def test_updated_status_to_resolution_submitted(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_status_resolution_submitted(creating_and_deleting_item)
+    update_item.check_updated_status_resolution_submitted()
+
+
+def test_updated_status_to_complete(creating_and_deleting_item):
+    update_item = UpdateItem()
+    update_item.update_item_status_complete(creating_and_deleting_item)
+    update_item.check_updated_status_complete()
 
 
 # -------------------Team update by user----------------------------------------
@@ -129,3 +153,10 @@ def test_update_all_impact_amounts(creating_and_deleting_item):
     new_amount = 25
     update_item_instance.update_all_impact_amounts(creating_and_deleting_item, new_amount)
     update_item_instance.check_update_all_impacts()
+
+
+def test_update_all_investments_amounts(creating_and_deleting_item):
+    update_item_instance = UpdateItem()
+    new_amount = 35
+    update_item_instance.update_all_investment_amounts(creating_and_deleting_item, new_amount)
+    update_item_instance.check_update_all_investments()
